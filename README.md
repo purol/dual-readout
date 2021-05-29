@@ -50,8 +50,8 @@ Then do
 , which run GEANT4 simulation with `test_Z2tau2pipipi_42.root` file. You can check the volume of the `test_Z2tau2pipipi_42.root` file is larger than before.
 
 ### Reconstruction
-    Because of technical issue, I did not use Reco. It is also possible to produce root files to run TMVA and CNN without this step (reconstruction is conducted after).
-    So, you can just skip this step.
+> Because of technical issue, I did not use Reco. It is also possible to produce root files to run TMVA and CNN without this step (reconstruction is conducted after). So, you can just skip this step.
+
 This requires the ROOT file generated from `DRsim`. Assuming the name of the file `<filename>_<filenumber>.root`, in build/Reco,
 
     #./Reco <filenumber> <filename>
@@ -122,7 +122,8 @@ It save energy distribution of scintillation channel and Cherenkov channel. The 
 The size of images is 224x224. Therefore, format of image is 2x224x224 (channel x height x width)
 
 #### produce_rootfiles_for_CNN_clusters_images_280x280.cc
-    This code has a potential error. You need to revise it!
+> This code has a potential error. You need to revise it!
+
 You can find `./bin/produce_rootfiles_for_CNN_clusters_images_280x280` in the install directory. It is for CNN. Do
 
     ./bin/produce_rootfiles_for_CNN_clusters_images_280x280 42 test_Z2tau2pipipi
@@ -137,7 +138,7 @@ The example of saved data is the below plot:
 
 The size of images is 280x280. Therefore, format of image is 4x280x280 (channel x height x width)
 
-    I assumed that towers consisted of 56x56 towers. So, I made the size of image to be 280x280. However, the number of fibers inside towers depend on the eta and phi position of towers. You need to fix it.
+> I assumed that towers consisted of 56x56 towers. So, I made the size of image to be 280x280. However, the number of fibers inside towers depend on the eta and phi position of towers. You need to fix it.
     
     
 #### produce_rootfiles_for_CNN_clusters_images_256x256.cc
@@ -150,7 +151,7 @@ You can find `./bin/produce_rootfiles_for_CNN_clusters_images_256x256` in the in
 The example of saved data is the below plot:
 ![Alt text](/img/S_256.png "S_256")
 
-The size of images is 280x280. Therefore, format of image is 4x256x256 (channel x height x width)
+The size of images is 256x256. Therefore, format of image is 4x256x256 (channel x height x width)
 
 ### How to run CNN
 https://github.com/purol/HEP-CNN
