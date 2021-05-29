@@ -110,9 +110,9 @@ sample TMVA code is in `TMVA_script` directory of the main directory. You can se
 `TMVAClassification.C` is the code for TMVA. `draw_input_variables.c` is the code to plot the input variables. You need to modify them to use.
 
 #### produce_rootfiles_for_CNN_4pi_images_224x224.cc
-You can find `./bin/produce_rootfiles_for_TMVA` in the install directory. It is for CNN. Do
+You can find `./bin/produce_rootfiles_for_CNN_4pi_images_224x224` in the install directory. It is for CNN. Do
 
-    ./bin/produce_rootfiles_for_TMVA 42 test_Z2tau2pipipi
+    ./bin/produce_rootfiles_for_CNN_4pi_images_224x224 42 test_Z2tau2pipipi
     
 , which would produce `test_Z2tau2pipipi_CNN_out_42.root` file. In this root file, energy distribution of 4pi calorimeter is saved.
 
@@ -123,7 +123,7 @@ The size of images is 224x224. Therefore, format of image is 2x224x224 (channel 
 
 #### produce_rootfiles_for_CNN_clusters_images_280x280.cc
     This code has a potential error. You need to revise it!
-You can find `./bin/produce_rootfiles_for_TMVA` in the install directory. It is for CNN. Do
+You can find `./bin/produce_rootfiles_for_CNN_clusters_images_280x280` in the install directory. It is for CNN. Do
 
     ./bin/produce_rootfiles_for_CNN_clusters_images_280x280 42 test_Z2tau2pipipi
     
@@ -138,3 +138,25 @@ The example of saved data is the below plot:
 The size of images is 280x280. Therefore, format of image is 4x280x280 (channel x height x width)
 
     I assumed that towers consisted of 56x56 towers. So, I made the size of image to be 280x280. However, the number of fibers inside towers depend on the eta and phi position of towers. You need to fix it.
+    
+    
+#### produce_rootfiles_for_CNN_clusters_images_256x256.cc
+You can find `./bin/produce_rootfiles_for_CNN_clusters_images_256x256` in the install directory. It is for CNN. Do
+
+    ./bin/produce_rootfiles_for_CNN_clusters_images_256x256 42 test_Z2tau2pipipi
+    
+, which would produce `test_Z2tau2pipipi_CNN_out_42.root` file. In this root file, energy distributions near the clusters are saved. The center is the position of cluster. Size is 0.5 rad x 0.5 rad. It save energy distribution of scintillation channel and Cherenkov channel. Also, it save the images with respect to two clusters. The first one is the most energetic cluster in scintillation channel. The other one is the secondarily energetic cluster in scintillation channel.
+
+The example of saved data is the below plot:
+![Alt text](/img/S_256.png "S_256")
+
+The size of images is 280x280. Therefore, format of image is 4x256x256 (channel x height x width)
+
+### How to run CNN
+https://github.com/purol/HEP-CNN
+
+### Note
+This code is based on v0.0.1
+
+### More information
+https://github.com/SanghyunKo/dual-readout
