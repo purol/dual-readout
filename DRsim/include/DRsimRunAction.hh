@@ -1,12 +1,10 @@
 #ifndef DRsimRunAction_h
 #define DRsimRunAction_h 1
 
+#include "RootInterface.h"
 #include "DRsimInterface.h"
-#include "DRsimEventAction.hh"
 #include "HepMCG4Reader.hh"
-
 #include "SimG4FastSimOpFiberRegion.h"
-#include "SimG4SaveDRcaloHits.h"
 
 #include "G4UserRunAction.hh"
 #include "globals.hh"
@@ -21,14 +19,8 @@ public:
   virtual void BeginOfRunAction(const G4Run*);
   virtual void EndOfRunAction(const G4Run*);
 
-  const podio::EventStore* GetEventStore() { return pStore.get(); }
-  const podio::ROOTWriter* GetWriter() { return pWriter.get(); }
-
-  const SimG4SaveDRcaloHits* GetSaveHits() const { return pSaveHits.get(); }
-
-  void SetEventAction(DRsimEventAction* eventAction) { pEventAction = eventAction; }
-
   static HepMCG4Reader* sHepMCreader;
+  static RootInterface<DRsimInterface::DRsimEventData>* sRootIO;
   static int sNumEvt;
 
 private:
@@ -36,10 +28,6 @@ private:
   G4String fFilename;
   G4bool fUseHepMC;
   SimG4FastSimOpFiberRegion* fOpFiberRegion;
-  std::unique_ptr<podio::EventStore> pStore;
-  std::unique_ptr<podio::ROOTWriter> pWriter;
-  std::unique_ptr<SimG4SaveDRcaloHits> pSaveHits;
-  DRsimEventAction* pEventAction;
 };
 
 #endif

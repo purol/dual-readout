@@ -3,40 +3,39 @@
 
 #include "GeoSvc.h"
 
-#include "DRcaloSiPMHit.h"
+#include "DRsimInterface.h"
 
-#include "podio/ROOTWriter.h"
-#include "podio/EventStore.h"
-
-// Data model
-#include "edm4hep/MCParticleCollection.h"
-#include "edm4hep/SimCalorimeterHitCollection.h"
-#include "edm4hep/DRSimCalorimeterHitCollection.h"
+/** @class SimG4SaveCalHits SimG4Components/src/SimG4SaveCalHits.h SimG4SaveCalHits.h
+ *
+ *  Save calorimeter hits tool.
+ *  All collections passed in the job options will be saved (\b'readoutNames').
+ *  Readout name is defined in DD4hep XML file as the attribute 'readout' of 'detector' tag.
+ *  If (\b'readoutNames') contain no elements or names that do not correspond to any hit collection,
+ *  tool will fail at initialization.
+ *  [For more information please see](@ref md_sim_doc_geant4fullsim).
+ *
+ *  @author Anna Zaborowska
+ */
 
 class SimG4SaveDRcaloHits {
 public:
-  explicit SimG4SaveDRcaloHits(podio::EventStore* store, podio::ROOTWriter* writer);
+  explicit SimG4SaveDRcaloHits();
   virtual ~SimG4SaveDRcaloHits();
 
   void initialize();
 
-  void saveOutput(const G4Event* aEvent) const;
+  void saveOutput(const G4Event* aEvent);
+
+  void setEventData(DRsimInterface::DRsimEventData* evtData) { fEventData = evtData; }
 
 private:
-  void addStruct( const std::map< std::pair<float,float>, int >& structData, std::function<void(int)> addTo ) const;
-  void checkMetadata(const ddDRcalo::DRcaloSiPMHit* hit) const;
-
   /// Pointer to the geometry service
   GeoSvc* m_geoSvc;
 
+  DRsimInterface::DRsimEventData* fEventData;
+
   /// Name of the readouts (hits collections) to save
   std::vector<std::string> m_readoutNames;
-
-  podio::EventStore* pStore;
-  podio::ROOTWriter* pWriter;
-
-  edm4hep::SimCalorimeterHitCollection* mSimCaloHits;
-  edm4hep::DRSimCalorimeterHitCollection* mDRsimCaloHits;
 };
 
 #endif

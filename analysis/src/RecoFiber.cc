@@ -9,7 +9,7 @@ RecoFiber::RecoFiber() {
   fCalibC = 0.;
 
   // [L] = mm, [t] = ns
-  fSpeed = 158.8;
+  fSpeed = 189.5;
   fEffSpeedInv = 1./fSpeed - 1./300.;
   fDepthEM = 149.49;
   fAbsLen = 5677.;
@@ -24,14 +24,16 @@ void RecoFiber::reconstruct(const DRsimInterface::DRsimSiPMData& sipm, RecoInter
     recoFiber.E = (float)recoFiber.n / fCalibC;
     recoFiber.Ecorr = recoFiber.E;
     recoFiber.t = setTmax(sipm);
-    //addFjInputs(recoFiber);
+
+    recoFiber.depth = setDepth(recoFiber.t, recoTower, sipm);
+
+    addFjInputs(recoFiber);
   } else {
     recoFiber.E = (float)recoFiber.n / fCalibS;
     recoFiber.t = setTmax(sipm);
 
-    recoFiber.depth = setDepth(recoFiber.t,recoTower);
     recoFiber.Ecorr = recoFiber.E*std::exp((-recoFiber.depth+fDepthEM)/fAbsLen);
-    //addFjInputs(recoFiber);
+    addFjInputs(recoFiber);
   }
 
   fData = recoFiber;
@@ -49,8 +51,14 @@ float RecoFiber::setTmax(const DRsimInterface::DRsimSiPMData& sipm) {
   return maxima.first.first;
 }
 
-float RecoFiber::setDepth(const float tmax, const RecoInterface::RecoTowerData& recoTower) {
-  float depth = ( 1800./300. + 2000./fSpeed - tmax )/( fEffSpeedInv ); // #TODO fix hardcoding, only works at the first few towers
+float RecoFiber::setDepth(const float tmax, const RecoInterface::RecoTowerData& recoTower, const DRsimInterface::DRsimSiPMData& sipm) {
+  auto position = fSeg->towerposition_from_cell_ID(sipm.SiPMnum); // cm
+  TVector3 temp_vec; temp_vec.SetXYZ(position.x(), position.y(), position.z());
+  double towerH = fSeg->towerheight_from_cell_ID(sipm.SiPMnum); // cm
+
+  float distance = (float) ( (temp_vec.Mag() - towerH / 2.0) * 10.0 ); // mm
+
+  float depth = ( distance/300. + 2000./fSpeed - tmax )/( fEffSpeedInv ); // 300mm/ns
   if (depth < 0.) return 0.;
   else if (depth > 2000.) return 2000.;
   else return depth;
@@ -66,7 +74,7 @@ int RecoFiber::cutXtalk(const DRsimInterface::DRsimSiPMData& sipm) {
 
   return sum;
 }
-/*
+
 void RecoFiber::addFjInputs(const RecoInterface::RecoFiberData& recoFiber) {
   auto global = fSeg->position(recoFiber.fiberNum);
   TVector3 vec(global.x(),global.y(),global.z());
@@ -74,11 +82,16 @@ void RecoFiber::addFjInputs(const RecoInterface::RecoFiberData& recoFiber) {
 
   if (fSeg->IsCerenkov(recoFiber.fiberNum)) {
     fFjInputs_C.push_back( fastjet::PseudoJet(p.x(),p.y(),p.z(),recoFiber.E) );
+    fFjInputs_depth.push_back(recoFiber.depth);
+    fFjInputs_fibernum_C.push_back(recoFiber.fiberNum);
   } else {
     fFjInputs_S.push_back( fastjet::PseudoJet(p.x(),p.y(),p.z(),recoFiber.E) );
 
     TVector3 p_corr = recoFiber.Ecorr*vec.Unit();
     fFjInputs_Scorr.push_back( fastjet::PseudoJet(p_corr.x(),p_corr.y(),p_corr.z(),recoFiber.Ecorr) );
+
+    fFjInputs_fibernum_S.push_back(recoFiber.fiberNum);
+    fFjInputs_fibernum_Scorr.push_back(recoFiber.fiberNum);
   }
 }
 
@@ -86,4 +99,8 @@ void RecoFiber::clear() {
   fFjInputs_S.clear();
   fFjInputs_Scorr.clear();
   fFjInputs_C.clear();
-}*/
+  fFjInputs_depth.clear();
+  fFjInputs_fibernum_S.clear();
+  fFjInputs_fibernum_Scorr.clear();
+  fFjInputs_fibernum_C.clear();
+}

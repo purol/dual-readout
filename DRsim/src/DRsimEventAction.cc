@@ -1,4 +1,5 @@
 #include "DRsimEventAction.hh"
+#include "DRsimRunAction.hh"
 #include "DRsimPrimaryGeneratorAction.hh"
 
 #include "G4PrimaryVertex.hh"
@@ -13,23 +14,24 @@ namespace {
 }
 
 DRsimEventAction::DRsimEventAction()
-: G4UserEventAction(), pSaveHits(nullptr), pStore(nullptr), pWriter(nullptr)
+: G4UserEventAction()
 {
   // set printing per each event
   G4RunManager::GetRunManager()->SetPrintProgress(1);
+
+  fSaveHits = new SimG4SaveDRcaloHits();
+  fEventData = new DRsimInterface::DRsimEventData();
 }
 
-DRsimEventAction::~DRsimEventAction() {}
+DRsimEventAction::~DRsimEventAction() {
+  if (fSaveHits) delete fSaveHits;
+  if (fEventData) delete fEventData;
+}
 
 void DRsimEventAction::BeginOfEventAction(const G4Event*) {
-  if (pSaveHits==nullptr)
-    G4Exception("DRsimEventAction::BeginOfEventAction()","",FatalException,
-                "Should initialize SimG4SaveDRcaloHits before starting the Run");
-  if ( pStore==nullptr || pWriter==nullptr )
-    G4Exception("DRsimEventAction::BeginOfEventAction()","",FatalException,
-                "Should initialize PODIO Writer & Eventstore before starting the Run");
-
 	clear();
+
+  fSaveHits->setEventData(fEventData);
 }
 
 void DRsimEventAction::clear() {
@@ -37,7 +39,7 @@ void DRsimEventAction::clear() {
 }
 
 void DRsimEventAction::EndOfEventAction(const G4Event* event) {
-  pSaveHits->saveOutput(event);
+  fSaveHits->saveOutput(event);
 
   for (int iVtx = 0; iVtx < event->GetNumberOfPrimaryVertex(); iVtx++) {
     G4PrimaryVertex* vtx = event->GetPrimaryVertex(iVtx);
@@ -49,9 +51,6 @@ void DRsimEventAction::EndOfEventAction(const G4Event* event) {
   }
 
   fEventData->event_number = DRsimPrimaryGeneratorAction::sIdxEvt;
-
-  writeEvent();
-  clearCollections();
 
   queue();
   clear();
@@ -73,13 +72,13 @@ void DRsimEventAction::fillPtcs(G4PrimaryVertex* vtx, G4PrimaryParticle* ptc) {
 }
 
 void DRsimEventAction::queue() {
-  // while ( DRsimRunAction::sNumEvt != DRsimPrimaryGeneratorAction::sIdxEvt ) {
-  //   G4AutoLock lock(&DRsimEventActionMutex);
-  //   if ( DRsimRunAction::sNumEvt == DRsimPrimaryGeneratorAction::sIdxEvt ) break;
-  //   G4CONDITIONWAIT(&DRsimEventActionCV, &lock);
-  // }
-  // G4AutoLock lock(&DRsimEventActionMutex);
-  // DRsimRunAction::sRootIO->fill(fEventData);
-  // DRsimRunAction::sNumEvt++;
-  // G4CONDITIONBROADCAST(&DRsimEventActionCV);
+  while ( DRsimRunAction::sNumEvt != DRsimPrimaryGeneratorAction::sIdxEvt ) {
+    G4AutoLock lock(&DRsimEventActionMutex);
+    if ( DRsimRunAction::sNumEvt == DRsimPrimaryGeneratorAction::sIdxEvt ) break;
+    G4CONDITIONWAIT(&DRsimEventActionCV, &lock);
+  }
+  G4AutoLock lock(&DRsimEventActionMutex);
+  DRsimRunAction::sRootIO->fill(fEventData);
+  DRsimRunAction::sNumEvt++;
+  G4CONDITIONBROADCAST(&DRsimEventActionCV);
 }

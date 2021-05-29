@@ -32,13 +32,13 @@ namespace ddDRcalo {
     unsigned long GetPhotonCount() const { return fPhotons; }
 
     void SetSiPMnum(dd4hep::DDSegmentation::CellID n) { fSiPMnum = n; }
-    const dd4hep::DDSegmentation::CellID& GetSiPMnum() const { return fSiPMnum; }
+    dd4hep::DDSegmentation::CellID GetSiPMnum() const { return fSiPMnum; }
 
     void CountWavlenSpectrum(DRsimInterface::hitRange range);
-    const DRsimInterface::DRsimWavlenSpectrum& GetWavlenSpectrum() const { return fWavlenSpectrum; }
+    DRsimInterface::DRsimWavlenSpectrum GetWavlenSpectrum() const { return fWavlenSpectrum; }
 
     void CountTimeStruct(DRsimInterface::hitRange range);
-    const DRsimInterface::DRsimTimeStruct& GetTimeStruct() const { return fTimeStruct; }
+    DRsimInterface::DRsimTimeStruct GetTimeStruct() const { return fTimeStruct; }
 
   private:
     dd4hep::DDSegmentation::CellID fSiPMnum;

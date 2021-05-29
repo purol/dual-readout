@@ -36,6 +36,8 @@ namespace DDSegmentation {
     double GetBl2sipm() { return fV4sipm.X()*std::tan(fPhiZRot/2.); }
     double GetTl2sipm() { return fV2sipm.X()*std::tan(fPhiZRot/2.); }
 
+    double GetTowerH() { return fTowerH; }
+
     dd4hep::RotationZYX GetRotationZYX(int numPhi);
     dd4hep::Position GetTowerPos(int numPhi);
     dd4hep::Position GetAssemblePos(int numPhi);

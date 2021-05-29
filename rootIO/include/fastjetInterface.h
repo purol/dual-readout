@@ -48,12 +48,18 @@ public:
 
   void init(TTree* treeIn, std::string branchname);
   void writeJets(std::vector<fastjet::PseudoJet> jets);
+  void MywriteJets(std::vector<fastjet::PseudoJet> jets, std::vector<fastjet::PseudoJet> constituents[], std::vector<long long int> constituents_fibernum[]);
   void runFastjet(const std::vector<fastjet::PseudoJet>& input);
+  void MyrunFastjet(const std::vector<fastjet::PseudoJet>& input, const std::vector<long long int>& fibernum);
   void set(TTree* treeIn, std::string branchname);
   void read(std::vector<fastjetData>& jets);
+  void Myread(std::vector<fastjetData>& jets, std::vector<fastjetData>** constituents, int* num, std::vector<long long int>** constituents_for_fibernum);
 
 private:
   std::vector<fastjetData>* fJets;
+  std::vector<fastjetData>* fjets_constituents;
+  int num_jets;
+  std::vector<long long int>* fjets_constituents_fibernum;
   std::vector<fastjetDataBase>* fJetBase;
 
 };

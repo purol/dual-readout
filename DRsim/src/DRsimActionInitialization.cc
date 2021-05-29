@@ -31,15 +31,10 @@ void DRsimActionInitialization::BuildForMaster() const {
 
 void DRsimActionInitialization::Build() const {
   SetUserAction(new DRsimPrimaryGeneratorAction(fSeed,fUseHepMC,fUseCalib,fUseGPS));
-
-  DRsimRunAction* runAction = new DRsimRunAction(fSeed,fFilename,fUseHepMC);
-  SetUserAction(runAction);
+  SetUserAction(new DRsimRunAction(fSeed,fFilename,fUseHepMC));
 
   DRsimEventAction* eventAction = new DRsimEventAction();
   SetUserAction(eventAction);
-
-  // cheat to avoid constness
-  runAction->SetEventAction(eventAction);
 
   SimG4DRcaloSteppingAction* steppingAction = new SimG4DRcaloSteppingAction();
   steppingAction->setEventData( eventAction->getEventData() );

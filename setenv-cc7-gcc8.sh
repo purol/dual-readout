@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export PATH=/cvmfs/sft.cern.ch/lcg/contrib/CMake/3.14.2/Linux-x86_64/bin:$PATH
+export PATH=/cvmfs/sft.cern.ch/lcg/contrib/CMake/3.17.1/Linux-x86_64/bin:$PATH
 source /cvmfs/sft.cern.ch/lcg/contrib/gcc/8/x86_64-centos7/setup.sh
 
 source /cvmfs/sft.cern.ch/lcg/releases/LCG_97a_FCC_1/Boost/1.72.0/x86_64-centos7-gcc8-opt/Boost-env.sh
@@ -17,3 +17,4 @@ export PYTHIA_DIR=/cvmfs/sft.cern.ch/lcg/releases/LCG_97a_FCC_1/MCGenerators/pyt
 export PYTHIA8=/cvmfs/sft.cern.ch/lcg/releases/LCG_97a_FCC_1/MCGenerators/pythia8/244/x86_64-centos7-gcc8-opt
 export PYTHIA8DATA=/cvmfs/sft.cern.ch/lcg/releases/LCG_97a_FCC_1/MCGenerators/pythia8/244/x86_64-centos7-gcc8-opt/share/Pythia8/xmldoc
 export ROOT_INCLUDE_PATH=$HEPMC_DIR/include:$ROOT_INCLUDE_PATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HEPMC_DIR/lib64:$FASTJET_DIR/lib:$PYTHIA_DIR/lib:$PWD/lib
