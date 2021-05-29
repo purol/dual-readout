@@ -75,32 +75,32 @@ You can find `./bin/produce_rootfiles_for_TMVA.cc` in the install directory. It 
     total_missing_energy: total missing energy
     average_S_sigma: spreadness of clusters in scintillation channel
     average_C_sigma: spreadness of clusters in Cherenkov channel
-    S_sigma_first_cluster
-    C_sigma_first_cluster
-    S_sigma_second_cluster
-    C_sigma_second_cluster
-    total_signal_peak_position_S
-    total_signal_peak_position_C
-    time_signal_rise_threshold_S
-    time_signal_rise_threshold_C
-    time_signal_fall_threshold_S
-    time_signal_fall_threshold_C
-    signal_peak_position_S_first_cluster
-    signal_peak_position_C_first_cluster
-    signal_peak_position_S_second_cluster
-    signal_peak_position_C_second_cluster
-    rise_time_10to90_S_first_cluster
-    rise_time_10to90_C_first_cluster
-    rise_time_10to90_S_second_cluster
-    rise_time_10to90_C_second_cluster
-    middle_of_10to90_S_first_cluster
-    middle_of_10to90_C_first_cluster
-    middle_of_10to90_S_second_cluster
-    middle_of_10to90_C_second_cluster
-    S_of_C_first_cluster
-    S_of_C_second_cluster
-    E_33_dividedby_E_55_S_first_cluster
-    E_33_dividedby_E_55_C_first_cluster
-    E_33_dividedby_E_55_S_second_cluster
-    E_33_dividedby_E_55_C_second_cluster
+    S_sigma_first_cluster: spreadness of most energetic cluster in scintillation channel
+    C_sigma_first_cluster: spreadness of the cluster in Cherenkov channel. The cluster is most energetic cluster in scintillation channel
+    S_sigma_second_cluster: spreadness of secondarily energetic cluster in scintillation channel
+    C_sigma_second_cluster: spreadness of the cluster in Cherenkov channel. The cluster is secondarily energetic cluster in scintillation channel
+    total_signal_peak_position_S: peak position of total signal in scintillation channel (unit: ns)
+    total_signal_peak_position_C: peak position of total signal in Cherenkov channel (unit: ns)
+    time_signal_rise_threshold_S: first time when total signal cross a threshold in scintillation channel (default threshold: half of peak height)
+    time_signal_rise_threshold_C: first time when total signal cross a threshold in Cherenkov channel (default threshold: half of peak height)
+    time_signal_fall_threshold_S: last time when total signal cross a threshold in scintillation channel (default threshold: half of peak height)
+    time_signal_fall_threshold_C: last time when total signal cross a threshold in Cherenkov channel (default threshold: half of peak height)
+    signal_peak_position_S_first_cluster: peak position of signal of most energetic cluster in scintillation channel (unit: ns)
+    signal_peak_position_C_first_cluster: peak position of signal of the cluster in Cherenkov channel. The cluster is most energetic cluster in scintillation channel. (unit: ns)
+    signal_peak_position_S_second_cluster: peak position of signal of secondarily energetic cluster in scintillation channel (unit: ns)
+    signal_peak_position_C_second_cluster: peak position of signal of the cluster in Cherenkov channel. The cluster is secondarily energetic cluster in scintillation channel. (unit: ns)
+    rise_time_10to90_S_first_cluster: rise time(10to90) of signal of most energetic cluster in scintillation channel (unit: ns)
+    rise_time_10to90_C_first_cluster: rise time(10to90) of signal of the cluster in Cherenkov channel. The cluster is most energetic cluster in scintillation channel. (unit: ns)
+    rise_time_10to90_S_second_cluster: rise time(10to90) of signal of secondarily energetic cluster in scintillation channel (unit: ns)
+    rise_time_10to90_C_second_cluster: rise time(10to90) of signal of the cluster in Cherenkov channel. The cluster is secondarily energetic cluster in scintillation channel. (unit: ns)
+    middle_of_10to90_S_first_cluster: first time of crossing half height of signal of most energetic cluster in scintillation channel (unit: ns)
+    middle_of_10to90_C_first_cluster: first time of crossing half height of signal of the cluster in Cherenkov channel. The cluster is most energetic cluster in scintillation channel. (unit: ns)
+    middle_of_10to90_S_second_cluster: first time of crossing half height of signal of secondarily energetic cluster in scintillation channel (unit: ns)
+    middle_of_10to90_C_second_cluster: first time of crossing half height of signal of the cluster in Cherenkov channel. The cluster is secondarily energetic cluster in scintillation channel. (unit: ns)
+    S_of_C_first_cluster: Scintillation energy divided by Cherenkov energy of the cluster. The cluster is most energetic cluster in scintillation channel
+    S_of_C_second_cluster: Scintillation energy divided by Cherenkov energy of the cluster. The cluster is secondarily energetic cluster in scintillation channel
+    E_33_dividedby_E_55_S_first_cluster: energy inside 3x3 towers/energy inside 5x5 towers of the cluster in scintillation channel. Center of 3x3 and 5x5 is the tower which is most closest from the position of the cluster. The cluster is most energetic cluster in scintillation channel. 
+    E_33_dividedby_E_55_C_first_cluster: energy inside 3x3 towers/energy inside 5x5 towers of the cluster in Cherenkov channel. Center of 3x3 and 5x5 is the tower which is most closest from the position of the cluster. The cluster is most energetic cluster in scintillation channel. 
+    E_33_dividedby_E_55_S_second_cluster: energy inside 3x3 towers/energy inside 5x5 towers of the cluster in scintillation channel. Center of 3x3 and 5x5 is the tower which is most closest from the position of the cluster. The cluster is secondarily energetic cluster in scintillation channel. 
+    E_33_dividedby_E_55_C_second_cluster: energy inside 3x3 towers/energy inside 5x5 towers of the cluster in Cherenkov channel. Center of 3x3 and 5x5 is the tower which is most closest from the position of the cluster. The cluster is secondarily energetic cluster in scintillation channel. 
     
