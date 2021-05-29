@@ -24,7 +24,9 @@ Here, `/fcc/jwpark/dual-readout-master` is the path of this program. You need to
 You can check the change in the `install` directory.
 
 ### Generating events
-There is `pipipi_generic.cmnd` file in the `pipipi_example directory` of the main directory. It is for Pythia8 to produce e^{-}e^{+}→Z→\tau^{-}\tau^{+} (\tau^{-}→\pi^{-}\pi^{+}\pi^{-}\nu).
+There is `pipipi_generic.cmnd` file in the `pipipi_example directory` of the main directory.
+
+It is for Pythia8 to produce e^{-}e^{+}→Z→\tau^{-}\tau^{+} (\tau^{-}→\pi^{-}\pi^{+}\pi^{-}\nu).
 Go to the install directory and copy that cmnd file into the install directory.
 
     cd ../install
@@ -113,3 +115,26 @@ You can find `./bin/produce_rootfiles_for_TMVA` in the install directory. It is 
     ./bin/produce_rootfiles_for_TMVA 42 test_Z2tau2pipipi
     
 , which would produce `test_Z2tau2pipipi_CNN_out_42.root` file. In this root file, energy distribution of 4pi calorimeter is saved.
+
+It save energy distribution of scintillation channel and Cherenkov channel. The example of saved data is the below plot:
+![Alt text](/img/S_224.png "S_224")
+
+The size of images is 224x224. Therefore, format of image is 2x224x224 (channel x height x width)
+
+#### produce_rootfiles_for_CNN_clusters_images_280x280.cc
+    This code has a potential error. You need to revise it!
+You can find `./bin/produce_rootfiles_for_TMVA` in the install directory. It is for CNN. Do
+
+    ./bin/produce_rootfiles_for_CNN_clusters_images_280x280 42 test_Z2tau2pipipi
+    
+, which would produce `test_Z2tau2pipipi_CNN_out_42.root` file. In this root file, energy distribution of 5x5 towers is saved.
+The center of 5x5 tower is the tower, which is most closest from the position of cluster.
+
+It save energy distribution of scintillation channel and Cherenkov channel. Also, it save the images with respect to two clusters. The first one is the most energetic cluster in scintillation channel. The other one is the secondarily energetic cluster in scintillation channel.
+
+The example of saved data is the below plot:
+![Alt text](/img/S_280.png "S_280")
+
+The size of images is 280x280. Therefore, format of image is 4x280x280 (channel x height x width)
+
+    I assumed that towers consisted of 56x56 towers. So, I made the size of image to be 280x280. However, the number of fibers inside towers depend on the eta and phi position of towers. You need to fix it.
