@@ -21,10 +21,10 @@ and do
     make -j4
     
 Here, `/fcc/jwpark/dual-readout-master` is the path of this program. You need to modify it.
-You can check the change in the `install` directory.
+You can check the change in the `install` .
 
 ### Generating events
-There is `pipipi_generic.cmnd` file in the `pipipi_example directory` of the main directory.
+There is `pipipi_generic.cmnd` file in the `pipipi_example` directory of the main directory.
 
 It is for Pythia8 to produce e^{-}e^{+}→Z→\tau^{-}\tau^{+} (\tau^{-}→\pi^{-}\pi^{+}\pi^{-}\nu).
 Go to the install directory and copy that cmnd file into the install directory.
@@ -39,7 +39,7 @@ Then, produce events using Pythia8,
 , which would produce `test_Z2tau2pipipi_42.root` file. Condor can make this process to be parallel.
 
 ### Running GEANT4
-You get `test_Z2tau2pipipi_42.root` file at the above step. There is `run_hepmc_pipipi.mac` file in the `pipipi_example directory` of the main directory. It is macro file to run GEANT4. Copy it into the install directory.
+You get `test_Z2tau2pipipi_42.root` file at the above step. There is `run_hepmc_pipipi.mac` file in the `pipipi_example` directory of the main directory. It is macro file to run GEANT4. Copy it into the install directory.
 
     cp ../pipipi_example directory/run_hepmc_pipipi.mac ./
     
