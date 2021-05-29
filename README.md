@@ -119,7 +119,7 @@ You can find `./bin/produce_rootfiles_for_CNN_4pi_images_224x224` in the install
 It save energy distribution of scintillation channel and Cherenkov channel. The example of saved data is the below plot:
 ![Alt text](/img/S_224.png "S_224")
 
-The size of images is 224x224. Therefore, format of image is 2x224x224 (channel x height x width)
+The size of single images is 224x224. Therefore, the size of image is 2x224x224 (channel x height x width)
 
 #### produce_rootfiles_for_CNN_clusters_images_280x280.cc
 > This code has a potential error. You need to revise it!
@@ -136,7 +136,7 @@ It save energy distribution of scintillation channel and Cherenkov channel. Also
 The example of saved data is the below plot:
 ![Alt text](/img/S_280.png "S_280")
 
-The size of images is 280x280. Therefore, format of image is 4x280x280 (channel x height x width)
+The size of single images is 280x280. Therefore, the size of image is 4x280x280 (channel x height x width)
 
 > I assumed that towers consisted of 56x56 towers. So, I made the size of image to be 280x280. However, the number of fibers inside towers depend on the eta and phi position of towers. You need to fix it.
     
@@ -151,7 +151,7 @@ You can find `./bin/produce_rootfiles_for_CNN_clusters_images_256x256` in the in
 The example of saved data is the below plot:
 ![Alt text](/img/S_256.png "S_256")
 
-The size of images is 256x256. Therefore, format of image is 4x256x256 (channel x height x width)
+The size of single images is 256x256. Therefore, the size of image is 4x256x256 (channel x height x width)
 
 ### How to run CNN
 https://github.com/purol/HEP-CNN
