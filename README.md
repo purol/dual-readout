@@ -57,9 +57,9 @@ This requires the ROOT file generated from `DRsim`. Assuming the name of the fil
 
 ### Produce root files to run TMVA or CNN
 #### produce_rootfiles_for_TMVA.cc
-You can find `./bin/produce_rootfiles_for_TMVA.cc` in the install directory. It is for TMVA. Do
+You can find `./bin/produce_rootfiles_for_TMVA` in the install directory. It is for TMVA. Do
 
-    ./bin/produce_rootfiles_for_TMVA.c 42 test_Z2tau2pipipi
+    ./bin/produce_rootfiles_for_TMVA 42 test_Z2tau2pipipi
 
 , which would produce `test_Z2tau2pipipi_out_42.root` file. In this root file, there are 40 variables. 
 
@@ -104,3 +104,12 @@ You can find `./bin/produce_rootfiles_for_TMVA.cc` in the install directory. It 
     E_33_dividedby_E_55_S_second_cluster: energy inside 3x3 towers/energy inside 5x5 towers of the cluster in scintillation channel. Center of 3x3 and 5x5 is the tower which is most closest from the position of the cluster. The cluster is secondarily energetic cluster in scintillation channel. 
     E_33_dividedby_E_55_C_second_cluster: energy inside 3x3 towers/energy inside 5x5 towers of the cluster in Cherenkov channel. Center of 3x3 and 5x5 is the tower which is most closest from the position of the cluster. The cluster is secondarily energetic cluster in scintillation channel. 
     
+sample TMVA code is in `TMVA_script` directory of the main directory. You can see `TMVAClassification.C` and `draw_input_variables.c`.
+`TMVAClassification.C` is the code for TMVA. `draw_input_variables.c` is the code to plot the input variables. You need to modify them to use.
+
+#### produce_rootfiles_for_CNN_4pi_images_224x224.cc
+You can find `./bin/produce_rootfiles_for_TMVA` in the install directory. It is for CNN. Do
+
+    ./bin/produce_rootfiles_for_TMVA 42 test_Z2tau2pipipi
+    
+, which would produce `test_Z2tau2pipipi_CNN_out_42.root` file. In this root file, energy distribution of 4pi calorimeter is saved.
