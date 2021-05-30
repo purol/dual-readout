@@ -30,7 +30,7 @@ It is for Pythia8 to produce e^{-}e^{+}→Z→\tau^{-}\tau^{+} (\tau^{-}→\pi^{
 Go to the install directory and copy that cmnd file into the install directory.
 
     cd ../install
-    cp ../pipipi_example directory/pipipi_generic.cmnd ./
+    cp ../pipipi_example/pipipi_generic.cmnd ./
     
 Then, produce events using Pythia8,
 
@@ -41,7 +41,7 @@ Then, produce events using Pythia8,
 ### Running GEANT4
 You get `test_Z2tau2pipipi_42.root` file at the above step. There is `run_hepmc_pipipi.mac` file in the `pipipi_example` directory of the main directory. It is macro file to run GEANT4. Copy it into the install directory.
 
-    cp ../pipipi_example directory/run_hepmc_pipipi.mac ./
+    cp ../pipipi_example/run_hepmc_pipipi.mac ./
     
 Then do
 
