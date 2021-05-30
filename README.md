@@ -138,7 +138,7 @@ The example of saved data is the below plot:
 
 The size of single images is 280x280. Therefore, the size of image is 4x280x280 (channel x height x width)
 
-> I assumed that towers consisted of 56x56 towers. So, I made the size of image to be 280x280. However, the number of fibers inside towers depend on the eta and phi position of towers. You need to fix it.
+> I assumed that towers consisted of 56x56 fibers. So, I made the size of image to be 280x280. However, the number of fibers inside towers depend on the eta and phi position of towers. You need to fix it.
     
     
 #### produce_rootfiles_for_CNN_clusters_images_256x256.cc
