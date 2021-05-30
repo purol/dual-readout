@@ -57,7 +57,7 @@ This requires the ROOT file generated from `DRsim`. Assuming the name of the fil
     #./Reco <filenumber> <filename>
     ./Reco 0 ../eltest
 
-### Produce root files to run TMVA or CNN
+### Produce root files to run TMVA
 #### produce_rootfiles_for_TMVA.cc
 You can find `./bin/produce_rootfiles_for_TMVA` in the install directory. It is for TMVA. Do
 
@@ -108,6 +108,9 @@ You can find `./bin/produce_rootfiles_for_TMVA` in the install directory. It is 
     
 sample TMVA code is in `TMVA_script` directory of the main directory. You can see `TMVAClassification.C` and `draw_input_variables.c`.
 `TMVAClassification.C` is the code for TMVA. `draw_input_variables.c` is the code to plot the input variables. You need to modify them to use.
+
+### Produce root files to run CNN
+This code provides 3 different options to produce image file. The size of image is different in each options. You need to choose the most appropriate one in the analysis. My recommendation is 256x256 image.
 
 #### produce_rootfiles_for_CNN_4pi_images_224x224.cc
 You can find `./bin/produce_rootfiles_for_CNN_4pi_images_224x224` in the install directory. It is for CNN. Do
