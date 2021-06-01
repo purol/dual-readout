@@ -2,7 +2,7 @@
 Modified dual-readout simulation of v0.0.1 for TMVA and CNN
 
 ## How to use
-### Complile
+### Compile
 After fetching the repository, go to the main directory.
 for a convenience, make `build` and `install` directories.
 
